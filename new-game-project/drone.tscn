@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://d3wto0ff44dow"]
+
+[ext_resource type="Script" uid="uid://c4rlq3b7btnvo" path="res://drone.gd" id="1_uvgqj"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_etgmo"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_uvgqj"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
+
+[node name="Drone" type="CharacterBody3D" unique_id=1750277528]
+script = ExtResource("1_uvgqj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2091679779]
+mesh = SubResource("BoxMesh_etgmo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1075461292]
+shape = SubResource("ConvexPolygonShape3D_uvgqj")
+
+[node name="Head" type="Node3D" parent="." unique_id=650018990]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1458457370]
