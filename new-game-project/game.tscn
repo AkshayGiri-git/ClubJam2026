@@ -2,6 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://d3wto0ff44dow" path="res://drone.tscn" id="1_80nbo"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80nbo"]
+albedo_color = Color(0.106236584, 0.10623657, 0.10623657, 1)
+
 [node name="Game" type="Node3D" unique_id=1386718692]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2026004549]
@@ -9,7 +12,12 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="Baseplate" type="CSGBox3D" parent="." unique_id=618806855]
+use_collision = true
 size = Vector3(500, 0.1, 500)
+material = SubResource("StandardMaterial3D_80nbo")
 
 [node name="Drone" parent="." unique_id=1750277528 instance=ExtResource("1_80nbo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 35.072845, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=178609899]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.60398275, 0.5511955, 0.70871985)

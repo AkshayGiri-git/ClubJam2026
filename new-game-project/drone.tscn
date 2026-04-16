@@ -18,4 +18,4 @@ shape = SubResource("ConvexPolygonShape3D_uvgqj")
 
 [node name="Head" type="Node3D" parent="." unique_id=650018990]
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1458457370]
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=1458457370]
