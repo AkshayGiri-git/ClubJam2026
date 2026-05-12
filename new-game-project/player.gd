@@ -1,20 +1,21 @@
 extends CharacterBody3D
 
+@onready var camera_3d = $Camera3D
 
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
-const SENSITIVITY = 0.03
-
-@onready var head = $Head
-@onready var camera_3d = $Head/Camera3D
-
-
+const SPEED = 10.0
+const JUMP_VELOCITY = 10
+const SENSITIVTIY = .001
 
 
 func _ready():
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED #Locks the cameraw	
 
-
+func _unhandled_input(event):
+	if event is InputEventMouseMotion:
+		rotate_y(-event.relative.x * SENSITIVTIY)
+		camera_3d.rotate_x(-event.relative.y * SENSITIVTIY)
+		camera_3d.rotation.x = clamp(camera_3d.rotation.x, -PI/2, PI/2) #Rotate only camera in y direction
+		
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
@@ -26,8 +27,8 @@ func _physics_process(delta):
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir = Input.get_vector("left", "right", "forward", "back")
-	var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var input_dir = Input.get_vector("left", "right", "up", "down")
+	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
@@ -36,8 +37,3 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
-func _unhandled_input(event):
-	if event is InputEventMouseMotion:
-		head.rotate_y(-event.relative.x * SENSITIVITY)
-		camera_3d.rotate_x(-event.relative.y * SENSITIVITY)
-		camera_3d.rotation.x = clamp(camera_3d.rotation.x,deg_to_rad(-60), deg_to_rad(60))
